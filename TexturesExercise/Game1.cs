@@ -47,26 +47,34 @@ namespace TexturesExercise
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            // Craete start point
+
+            // Create start point.
             Point startPoint = new Point(100, 100);
-            // create and load first texture
+
+            // Create and load first texture.
             Texture2D tx = Content.Load<Texture2D>(@"Badges\Badges_0");
+
             // Add first Character
             Characters.Add("Badges_0", 
                 new Sprite(tx,new Rectangle(startPoint,new Point(tx.Width,tx.Height)))
                 );
+
             Characters["Badges_0"].CharacterName = "Badges_0";
 
-            // Move Rectangle position along
+            // Move Rectangle position along.
             startPoint.X += tx.Width + 10;
-            // Add Badges_1
+
+
+            // Add Badges_1 (Second Character)
             tx = Content.Load<Texture2D>(@"Badges\Badges_1");
+
             Characters.Add("Badges_1",
                 new Sprite(tx,new Rectangle(startPoint, new Point(tx.Width, tx.Height)))
                 );
+
             Characters["Badges_1"].CharacterName = "Badges_1";
 
-            // Setup Player and give him a default character
+            // Setup Player and give them a default character.
             player = new Player(Characters["Badges_0"].Tx,new Rectangle(10, 10,tx.Width, tx.Height));
             player.CharacterName = "Badges_0";
             
@@ -95,6 +103,7 @@ namespace TexturesExercise
 
             // Update the player for movement
             player.Update();
+
             // TODO: Add your update logic here
             if(InputEngine.IsKeyPressed(Keys.C))
             {
@@ -119,17 +128,16 @@ namespace TexturesExercise
                         break;
                     }
                 }
-                // if found reset for next time and set player image
+
+                // if found reset for next time and set player image.
                 if (found != null)
                 {
                     found.Selected = false;
                     player.Tx = found.Tx;
                 }
             }
+
             base.Update(gameTime);
-
-
-
         }
 
         /// <summary>
@@ -139,13 +147,19 @@ namespace TexturesExercise
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
             spriteBatch.Begin();
-            if(CharactersOnScreen)
+
+            if (CharactersOnScreen)
+            {
                 foreach (var entry in Characters)
                 {
                     entry.Value.Draw(spriteBatch);
                 }
+            }
+
             player.Draw(spriteBatch);
+
             spriteBatch.End();
             // TODO: Add your drawing code here
 
